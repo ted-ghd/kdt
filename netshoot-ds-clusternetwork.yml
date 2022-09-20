@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: netshoot-cluster
+  labels:
+    app: netshoot-cluster
+spec:
+  selector:
+    matchLabels:
+      name: netshoot-cluster
+  template:
+    metadata:
+      labels:
+        name: netshoot-cluster
+    spec:
+      tolerations:
+      - operator: Exists
+      containers:
+      - name: netshoot-cluster
+        tty: true
+        stdin: true
+        args:
+        - bash
+        image: nicolaka/netshoot
